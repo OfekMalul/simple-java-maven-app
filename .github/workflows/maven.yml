@@ -31,6 +31,7 @@ jobs:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_PASSWD: ${{secrets.DOCKER_PASSWORD}}
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWD
-      - name: Push to DockerHub
+      - name: Tag image to DockerHub
         run: docker tag java-hello-world:$IMAGE_VERSION $DOCKER_REPO_NAME:1.0.0
-          docker push ${{secrets.DOCKER_USER}}/ofekmalul/java_hello_world:1.0.0
+      - name: Push to DockerHub
+        run: docker push ${{secrets.DOCKER_USER}}/ofekmalul/java_hello_world:1.0.0
