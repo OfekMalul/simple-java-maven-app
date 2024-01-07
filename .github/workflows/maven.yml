@@ -53,11 +53,10 @@ jobs:
 
       - name: changing into the terraform directory
         run: cd terraform
+        working-directory: ./terraform
 
       - name: initilize
-        run: |
-          ls -l
-          terraform init
+        run: terraform init
 
       - name: plan
         run: terraform plan -no-color
