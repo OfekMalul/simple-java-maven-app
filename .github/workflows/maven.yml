@@ -41,6 +41,7 @@ jobs:
 
       - name: push to DockerHub
         run: |
+          docker images
           docker push ${{secrets.DOCKER_USER}}/ofekmalul/java_hello_world:1.0.0
 
   # update_semantic_version:
