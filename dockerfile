@@ -14,7 +14,7 @@ FROM openjdk:11-jre
 
 WORKDIR /app
 # copies the executable from previous stage to current stage
-COPY --from=builder /app/target/my-app-${APP_VERSION}-SNAPSHOT.jar ./app.jar
+COPY --from=builder /app/target/my-app-*.jar ./app.jar
 
 # execute the jar file app.jar
 CMD ["java", "-jar", "./app.jar"]
