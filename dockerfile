@@ -1,6 +1,6 @@
 FROM maven:3.9 as builder
 
-ARG APP_VERSION=1.0.0-SNAPSHOT
+ARG APP_VERSION=1.0.0
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ FROM openjdk:11-jre
 
 WORKDIR /app
 # copies the executable from previous stage to current stage
-COPY --from=builder /app/target/my-app-${APP_VERSION}.jar ./app.jar
+COPY --from=builder /app/target/my-app-${APP_VERSION}-SNAPSHOT.jar ./app.jar
 
 # execute the jar file app.jar
 CMD ["java", "-jar", "./app.jar"]

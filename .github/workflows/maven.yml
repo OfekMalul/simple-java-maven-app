@@ -42,7 +42,7 @@ jobs:
 
           # Use Maven to set the new version using versions-maven-plugin
           mvn versions:set -DnewVersion=$NEW_VERSION
-
+          echo "$NEW_VERSION"
       - name: Public Docker image
         run: |
           docker build . --build-arg APP_VERSION=$NEW_VERSION --tag ${DOCKER_REPO_NAME_PUB}:$NEW_VERSION
