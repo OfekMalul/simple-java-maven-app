@@ -29,20 +29,10 @@ jobs:
       - name: Create a docker image and versioning by date + commit hash first 6 chars
         run: IMAGE_VERSION=$(date +%Y%m%d)-$(echo $GITHUB_SHA | cut -c1-6) && echo "IMAGE_VERSION=$IMAGE_VERSION" >> $GITHUB_ENV
       - name: Build docker image
-        run: docker build . -t java-hello-world:$IMAGE_VERSION
-
-  # update_semantic_version:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - users: actions/checkout@v3
-  #     - name: Bump version and push tag
-  #       uses: remorses/bump-version@js
-  #       with:
-  #         version_file: ./version.txt
-  #       name: build docker image with semantic versioning
-  #       run : docker build . -t java-hello-world:$
-
+        run: |
+        docker build . -t java-hello-world:$IMAGE_VERSION
+        docker images
+         
   push:
     runs-on: ubuntu-latest
 
@@ -58,3 +48,15 @@ jobs:
           docker images
           docker tag java-hello-world:$IMAGE_VERSION $DOCKER_REPO_NAME:1.0.0
           docker push ${{secrets.DOCKER_USER}}/ofekmalul/java_hello_world:1.0.0
+
+  # update_semantic_version:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - users: actions/checkout@v3
+  #     - name: Bump version and push tag
+  #       uses: remorses/bump-version@js
+  #       with:
+  #         version_file: ./version.txt
+  #       name: build docker image with semantic versioning
+  #       run : docker build . -t java-hello-world:$
