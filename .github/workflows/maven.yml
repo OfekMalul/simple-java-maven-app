@@ -56,8 +56,7 @@ jobs:
           PRIVATE_KEY: ${{ secrets.SSH_KEY_INSTANACE }}
 
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_IP}
+          ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ${USER_NAME}@${HOST_IP}
           sudo docker run ofekmalul/java_hello_world:latest
 
   # CD_Java_Project:
