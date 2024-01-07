@@ -52,6 +52,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
 
       - name: changing into the terraform directory
+        run: ls -l
         working-directory: ./terraform/
 
       - name: initilize
