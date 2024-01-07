@@ -51,18 +51,14 @@ jobs:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v3
 
-      - name: setting a working directory
-        working-directory: ./terraform
-        run: ls -l
-
       - name: initilize
-        run: ls -l && terraform init
+        run: cd terraform && terraform init
 
       - name: plan
-        run: terraform plan -no-color
+        run: cd terraform && terraform plan -no-color
 
       - name: apply
-        run: terraform apply -auto-approve
+        run: cd terraform && terraform apply -auto-approve
 
   # update_semantic_version:
   #   runs-on: ubuntu-latest
