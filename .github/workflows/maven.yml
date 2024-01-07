@@ -52,10 +52,9 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.1.7"
-      - name: get directory in working machine
-        run: |
-          ls -l
-          cd terraform
+      - name: changing into the terraform directory
+        run: cd terraform
+
       - name: initilize
         run: terraform init
 
