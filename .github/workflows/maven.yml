@@ -55,7 +55,9 @@ jobs:
         run: cd terraform
 
       - name: initilize
-        run: terraform init
+        run: |
+        ls -l
+        terraform init
 
       - name: plan
         run: terraform plan -no-color
