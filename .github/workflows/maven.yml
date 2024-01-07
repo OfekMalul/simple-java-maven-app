@@ -46,14 +46,12 @@ jobs:
 
   CD_Java_Project:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./terraform
 
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v3
-
-      - name: changing into the terraform directory
-        run: ls -l
-        working-directory: ./terraform/
 
       - name: initilize
         run: ls -l && terraform init
