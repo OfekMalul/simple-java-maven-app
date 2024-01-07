@@ -27,7 +27,7 @@ jobs:
       - name: Build and Test with Maven
         run: mvn package
       - name: Create a docker image and versioning by date + commit hash first 6 chars
-        run: export IMAGE_VERSION=$(date +%Y%m%d)-$(echo $GITHUB_SHA | cut -c1-6) >> $IMAGE_VERSION
+        run: IMAGE_VERSION=$(date +%Y%m%d)-$(echo $GITHUB_SHA | cut -c1-6) && echo "$IMAGE_VERSION" >> $IMAGE_VERSION
       - name: Build docker image
         run: docker build . -t java-hello-world:$IMAGE_VERSION
 
