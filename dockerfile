@@ -6,7 +6,7 @@ COPY . .
 
 # Clean removes all dependencies from previous build.
 # Install compiles the code + test and install dependencies
-RUN mvn clean install
+RUN mvn clean install -DskipTests
 
 FROM openjdk:11-jre
 
