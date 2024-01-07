@@ -49,16 +49,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: hashicorp/setup-terraform@v3
+      - name: Deploy to EC2
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          IP_ADDRESS_JAVA_INSTANCE: ${{ secrets.IP_ADDRESS_JAVA_INSTANCE }}
+          PRIVATE_KEY: ${{ secrets.SSH_KEY_INSTANACE }}
 
-      - name: initilize
-        run: cd terraform && terraform init
+        run: |
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
+          sudo docker run ofekmalul/java_hello_world:latest
 
-      - name: plan
-        run: cd terraform && terraform plan -no-color
+  # CD_Java_Project:
+  #   runs-on: ubuntu-latest
 
-      - name: apply
-        run: cd terraform && terraform apply -auto-approve
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: hashicorp/setup-terraform@v3
+
+  #     - name: initilize
+  #       run: cd terraform && terraform init
+
+  #     - name: plan
+  #       run: cd terraform && terraform plan -no-color
+
+  #     - name: apply
+  #       run: cd terraform && terraform apply -auto-approve
 
   # update_semantic_version:
   #   runs-on: ubuntu-latest
