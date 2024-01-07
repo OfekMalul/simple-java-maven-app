@@ -45,6 +45,7 @@ jobs:
           echo "$NEW_VERSION"
       - name: Public Docker image
         run: |
+          echo $NEW_VERSION
           docker build --build-arg APP_VERSION=${NEW_VERSION} . --tag ${DOCKER_REPO_NAME_PUB}:$NEW_VERSION
           docker build --build-arg APP_VERSION=${NEW_VERSION} . --tag ${DOCKER_REPO_NAME_PUB}:latest
 
