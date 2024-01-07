@@ -45,7 +45,7 @@ jobs:
         run: docker push ${{secrets.DOCKER_USER}}/java_hello_world:${IMAGE_VERSION}
 
   CD_Java_Project:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
