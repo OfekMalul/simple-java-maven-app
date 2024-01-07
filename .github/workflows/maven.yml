@@ -98,7 +98,7 @@ jobs:
 
             sudo docker images
             sudo docker ps -a
-            sudo docker run ofekmalul/java_hello_world:2024-01-07-7d19cf
+            sudo docker run ofekmalul/java_hello_world:latest
             '
 
   # CD_Java_Project:
