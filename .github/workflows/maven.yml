@@ -42,7 +42,7 @@ jobs:
       - name: push to DockerHub
         run: |
           docker images
-          docker push ${{secrets.DOCKER_USER}}/${DOCKER_REPO_NAME}:1.0.0
+          docker push ${{secrets.DOCKER_USER}}/java_hello_world:1.0.0
 
   # update_semantic_version:
   #   runs-on: ubuntu-latest
