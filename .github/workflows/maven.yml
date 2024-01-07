@@ -40,20 +40,22 @@ jobs:
           NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
+          # Use Maven to set the new version using versions-maven-plugin
+          mvn versions:set -DnewVersion=$NEW_VERSION
+
       - name: Public Docker image
         run: |
-          docker build . --tag ${DOCKER_REPO_NAME_PUB}:$NEW_VERSION
-          docker build . --tag ${DOCKER_REPO_NAME_PUB}:latest
+          docker build . --build-arg APP_VERSION=$NEW_VERSION --tag ${DOCKER_REPO_NAME_PUB}:$NEW_VERSION
+          docker build . --build-arg APP_VERSION=$NEW_VERSION --tag ${DOCKER_REPO_NAME_PUB}:latest
 
       - name: versioning by date + commit hash
         run: |
           IMAGE_VERSION=$(date +%Y-%m-%d)-$(echo $GITHUB_SHA | cut -c1-6)
           echo "IMAGE_VERSION=$IMAGE_VERSION" >> $GITHUB_ENV
-          mvn versions:set -DnewVersion=$NEW_VERSION
 
       - name: Company docker image
         run: |
-          docker build . --tag ${DOCKER_REPO_NAME_COMPANY}:$IMAGE_VERSION
+          docker build . --build-arg APP_VERSION=$NEW_VERSION --tag ${DOCKER_REPO_NAME_COMPANY}:$IMAGE_VERSION
 
       - name: docker login
         env:
@@ -66,6 +68,16 @@ jobs:
           docker push ${{secrets.DOCKER_USER}}/java_hello_world:${IMAGE_VERSION}
           docker push ${{secrets.DOCKER_USER}}/java-hello-world-production:${NEW_VERSION}
           docker push ${{secrets.DOCKER_USER}}/java-hello-world-production:latest
+
+      - name: update pom file in github repository
+        env:
+          USER_NAME: ${{secrets.USERNAME_GITHUB}}
+          USER_EMAIL: ${{secrets.USERNAME_GITHUB}}
+        run: |
+          git config --global user.name ${USER_NAME}
+          git config --global user.email ${USER_EMAIL}
+          git commit -am "update pom"
+          git push
 
   CD_Java_Project:
     runs-on: ubuntu-latest
