@@ -45,8 +45,8 @@ jobs:
           echo "$NEW_VERSION"
       - name: Public Docker image
         run: |
-          docker build --build-arg APP_VERSION=$NEW_VERSION . --tag ${DOCKER_REPO_NAME_PUB}:$NEW_VERSION
-          docker build --build-arg APP_VERSION=$NEW_VERSION . --tag ${DOCKER_REPO_NAME_PUB}:latest
+          docker build --build-arg APP_VERSION=${NEW_VERSION} . --tag ${DOCKER_REPO_NAME_PUB}:$NEW_VERSION
+          docker build --build-arg APP_VERSION=${NEW_VERSION} . --tag ${DOCKER_REPO_NAME_PUB}:latest
 
       - name: versioning by date + commit hash
         run: |
@@ -55,7 +55,7 @@ jobs:
 
       - name: Company docker image
         run: |
-          docker build --build-arg APP_VERSION=$NEW_VERSION . --tag ${DOCKER_REPO_NAME_COMPANY}:$IMAGE_VERSION
+          docker build --build-arg APP_VERSION=${NEW_VERSION} . --tag ${DOCKER_REPO_NAME_COMPANY}:$IMAGE_VERSION
 
       - name: docker login
         env:
