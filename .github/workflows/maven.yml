@@ -41,7 +41,7 @@ jobs:
 
       - name: push to DockerHub
         run: |
-          docker images
+          echo '$IMAGE_VERSION'
           docker tag java-hello-world:$IMAGE_VERSION $DOCKER_REPO_NAME:1.0.0
           docker push ${{secrets.DOCKER_USER}}/ofekmalul/java_hello_world:1.0.0
 
