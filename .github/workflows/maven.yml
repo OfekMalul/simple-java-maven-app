@@ -50,7 +50,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v3
-        working-directory: ./app
+
+      - name: setting a working directory
+        working-directory: ./terraform
+        run: ls -l
 
       - name: initilize
         run: ls -l && terraform init
