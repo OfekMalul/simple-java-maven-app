@@ -12,7 +12,7 @@ env:
   DOCKER_REPO_NAME: "ofekmalul/java_hello_world"
 
 jobs:
-  build:
+  CI Java Project:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
 
       - name: Create a docker image and versioning by date + commit hash first 6 chars
         run: |
-          IMAGE_VERSION=$(date +%Y%m%d)-$(echo $GITHUB_SHA | cut -c1-6)
+          IMAGE_VERSION=$(date +%Y-%m-%d)-$(echo $GITHUB_SHA | cut -c1-6)
           echo "IMAGE_VERSION=$IMAGE_VERSION" >> $GITHUB_ENV
 
       - name: Build docker image
@@ -42,9 +42,25 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWD
 
       - name: push to DockerHub
-        run: |
-          docker images
-          docker push ${{secrets.DOCKER_USER}}/java_hello_world:${IMAGE_VERSION}
+        run: docker push ${{secrets.DOCKER_USER}}/java_hello_world:${IMAGE_VERSION}
+
+  CD Java Project:
+    runs-on: ubuntu:latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.1.7"
+
+      - name: initilize
+        run: terraform init
+
+      - name: plan
+        run: terraform plan -no-color
+
+      - name: apply
+        run: terraform apply -auto-approve
 
   # update_semantic_version:
   #   runs-on: ubuntu-latest
