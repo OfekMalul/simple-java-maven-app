@@ -58,6 +58,8 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_IP}
+          sudo docker images
+          sudo docker ps -a
           sudo docker run ofekmalul/java_hello_world:2024-01-07-7d19cf
 
   # CD_Java_Project:
