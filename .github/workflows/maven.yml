@@ -8,7 +8,7 @@ on:
     branches: ["master"]
 
 env:
-  IMAGE_VERSION_SEMATNIC: 1.0.0
+  IMAGE_VERSION_SEMANTIC: 1.0.0
   IMAGE_VERSION: 1.0.0
   DOCKER_REPO_NAME: "ofekmalul/java_hello_world"
 
@@ -42,7 +42,7 @@ jobs:
       - name: push to DockerHub
         run: |
           echo '$IMAGE_VERSION'
-          docker tag java-hello-world:$IMAGE_VERSION $DOCKER_REPO_NAME:1.0.0
+          docker tag java-hello-world:${IMAGE_VERSION} $DOCKER_REPO_NAME:1.0.0
           docker push ${{secrets.DOCKER_USER}}/ofekmalul/java_hello_world:1.0.0
 
   # update_semantic_version:
