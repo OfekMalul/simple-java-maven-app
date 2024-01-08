@@ -7,10 +7,6 @@ on:
   push:
     branches: ["master"]
 
-env:
-  DOCKER_REPO_NAME_PUB: "ofekmalul/java-hello-world-production"
-  DOCKER_REPO_NAME_COMPANY: "ofekmalul/java_hello_world"
-
 jobs:
   CI_Java_Project:
     runs-on: ubuntu-latest

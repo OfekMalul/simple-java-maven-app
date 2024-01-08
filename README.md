@@ -1,15 +1,24 @@
-# simple-java-maven-app
+# Welcome to My Latest Devops Project
 
-This repository is for the
-[Build a Java app with Maven](https://jenkins.io/doc/tutorials/build-a-java-app-with-maven/)
-tutorial in the [Jenkins User Documentation](https://jenkins.io/doc/).
+This project provides a CI/CD pipeline utilizing GitHub Actions platform, in the goal to provide a streamlined and automated integration and deployment of Java Application. Incorporates the latest build, containerized and cloud technologies, Maven, Docker and AWS.
 
-The repository contains a simple Java application which outputs the string
-"Hello world!" and is accompanied by a couple of unit tests to check that the
-main application works as expected. The results of these tests are saved to a
-JUnit XML report.
+## Requirements
 
-The `jenkins` directory contains an example of the `Jenkinsfile` (i.e. Pipeline)
-you'll be creating yourself during the tutorial and the `jenkins/scripts` subdirectory
-contains a shell script with commands that are executed when Jenkins processes
-the "Deliver" stage of your Pipeline.
+### AWS
+
+- EC2: Ubuntu with t2 micro _minimum_
+- Install Docker on the EC2 (Docker installation in Docker website for guidance)
+
+### DockerHub
+
+- Create a repository to contain your docker images
+
+### GitHub Actions - Secrets
+
+- DockerHub username and password.
+- Github username and email
+- EC2 host ip address and username (if you created EC2 running with ubuntu the user name is ubuntu)
+
+### Github Actions - Environment Variables
+
+- Set your public and private repository as DOCKER_REPO_NAME_PUB and DOCKER_REPO_NAME_COMPANY.
