@@ -41,7 +41,7 @@ jobs:
 
       - name: Public Docker image
         run: |
-          echo "$NEW_VERSION" > version.txt
+          echo "$NEW_VERSION"
           docker build . --tag ${DOCKER_REPO_NAME_PUB}:$NEW_VERSION
           docker build . --tag ${DOCKER_REPO_NAME_PUB}:latest
 
