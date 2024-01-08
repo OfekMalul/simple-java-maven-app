@@ -1,7 +1,5 @@
 FROM maven:3.9 as builder
 
-ARG APP_VERSION=1.0.0
-
 WORKDIR /app
 
 COPY . .
